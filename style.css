@@ -2,5 +2,161 @@
 {
     margin: 0px;
     padding: 0px;
-    background-color: black;
+    
 }
+
+div
+{
+    border: greenyellow solid 1px;
+    background-color: aliceblue;
+}
+
+
+/*-----------------COLORS------------*/
+
+.main, .armoury
+{
+    background-color: #EAFAF1;
+}
+
+.spacer, .playerboard, .scoreboard, .armoury-title, .armoury-options
+{
+    background-color: #D5F5E3;
+}
+
+.cpu-title, .cpu-icon, .game-updates, .player-icon, .player-title, .scoreboard-title, .scors, .rock, .paper, .scissors
+{
+    background-color: #ABEBC6;
+}
+
+.cpu-score, .player-score
+{
+    background-color: #82E0AA;
+}
+
+
+/*-------------------POSITIONING---------------*/
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.main
+{
+    width: 90%;
+    height: 70%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.playerboard
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 70%;
+    flex-shrink: 0;
+}
+
+.spacer, .scoreboard-box
+{
+    width: 15%;
+}
+
+.cpu-icon, .player-icon
+{
+    width: 150px;
+    height: 150px;
+}
+
+.player-title, .cpu-title
+{
+    margin: 10px;
+}
+
+.game-updates
+{
+    margin: 50px;
+}
+
+.scoreboard-box
+{
+    display: flex;
+    justify-content: center;
+}
+
+.scoreboard
+{
+    width: 60%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+}
+
+.scoreboard-title
+{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 35px 15px 35px;
+}
+
+.scores
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.cpu-score, .player-score
+{
+    width: 75px;
+    height: 75px;
+    margin: 20px;
+}
+
+
+.armoury
+{
+    height:30%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    
+}
+
+.armoury-title
+{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.armoury-options
+{
+    width: 70%;
+    
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.rock, .paper, .scissors
+{
+    width: 130px;
+    height: 130px;
+}
+
+/*----------------------STYLING-------------------*/
+
