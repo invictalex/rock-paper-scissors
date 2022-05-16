@@ -2,37 +2,22 @@
 {
     margin: 0px;
     padding: 0px;
+    font-family: 'VT323', monospace;
+    font-size: xx-large;
+    text-transform: uppercase;
     
 }
 
-div
+::selection
 {
-    border: greenyellow solid 1px;
-    background-color: aliceblue;
+    background-color: rgb(0, 255, 0);
+    color: black;
 }
+
 
 
 /*-----------------COLORS------------*/
 
-.main, .armoury
-{
-    background-color: #EAFAF1;
-}
-
-.spacer, .playerboard, .scoreboard, .armoury-title, .armoury-options
-{
-    background-color: #D5F5E3;
-}
-
-.cpu-title, .cpu-icon, .game-updates, .player-icon, .player-title, .scoreboard-title, .scors, .rock, .paper, .scissors
-{
-    background-color: #ABEBC6;
-}
-
-.cpu-score, .player-score
-{
-    background-color: #82E0AA;
-}
 
 
 /*-------------------POSITIONING---------------*/
@@ -84,6 +69,7 @@ body
 .game-updates
 {
     margin: 50px;
+    font-size: 50px;
 }
 
 .scoreboard-box
@@ -107,7 +93,7 @@ body
 {
     width: 100%;
     box-sizing: border-box;
-    padding: 15px 35px 15px 35px;
+    text-align: center;
 }
 
 .scores
@@ -131,7 +117,7 @@ body
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 25px;
     
 }
 
@@ -139,7 +125,7 @@ body
 {
     width: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 7px;
     box-sizing: border-box;
 }
 
@@ -156,7 +142,55 @@ body
 {
     width: 130px;
     height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.icon
+{
+    width: 65px;
+    height: auto;
+}    
 /*----------------------STYLING-------------------*/
 
+body
+{
+    background-color: black;
+    color: rgb(21, 255, 0);
+}
+
+.cpu-icon, .player-icon, .scoreboard
+{
+    border:rgb(21, 255, 0) solid 2px;
+}
+
+.scoreboard-title
+{
+    background-color: rgb(0, 255, 0);
+    color: black;
+}
+
+.player-score, .cpu-score
+{
+    border:rgb(0, 255, 0) solid 1px;
+}
+
+.armoury
+{
+    border-top:rgb(0, 255, 0) solid 2px;
+    border-left:rgb(0, 255, 0) solid 2px;
+    border-right:rgb(0, 255, 0) solid 2px;
+}
+
+.armoury-title
+{
+    font-size: 50px;
+    color: black;
+    background-color: rgb(0, 255, 0);
+}
+
+.rock, .paper, .scissors
+{
+    border: solid 2px rgb(0, 255, 0);
+}
