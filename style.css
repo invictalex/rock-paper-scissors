@@ -2,5 +2,195 @@
 {
     margin: 0px;
     padding: 0px;
+    font-family: 'VT323', monospace;
+    font-size: xx-large;
+    text-transform: uppercase;
+    
+}
+
+::selection
+{
+    background-color: rgb(0, 255, 0);
+    color: black;
+}
+
+
+
+/*-----------------COLORS------------*/
+
+
+
+/*-------------------POSITIONING---------------*/
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.main
+{
+    width: 90%;
+    height: 70%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.playerboard
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 70%;
+    flex-shrink: 0;
+}
+
+.spacer, .scoreboard-box
+{
+    width: 15%;
+}
+
+.cpu-icon, .player-icon
+{
+    width: 150px;
+    height: 150px;
+}
+
+.player-title, .cpu-title
+{
+    margin: 10px;
+}
+
+.game-updates
+{
+    margin: 50px;
+    font-size: 50px;
+}
+
+.scoreboard-box
+{
+    display: flex;
+    justify-content: center;
+}
+
+.scoreboard
+{
+    width: 60%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+}
+
+.scoreboard-title
+{
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.scores
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.cpu-score, .player-score
+{
+    width: 75px;
+    height: 75px;
+    margin: 20px;
+}
+
+
+.armoury
+{
+    height:30%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    
+}
+
+.armoury-title
+{
+    width: 100%;
+    text-align: center;
+    padding: 7px;
+    box-sizing: border-box;
+}
+
+.armoury-options
+{
+    width: 70%;
+    
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.rock, .paper, .scissors
+{
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon
+{
+    width: 65px;
+    height: auto;
+}    
+/*----------------------STYLING-------------------*/
+
+body
+{
     background-color: black;
+    color: rgb(21, 255, 0);
+}
+
+.cpu-icon, .player-icon, .scoreboard
+{
+    border:rgb(21, 255, 0) solid 2px;
+}
+
+.scoreboard-title
+{
+    background-color: rgb(0, 255, 0);
+    color: black;
+}
+
+.player-score, .cpu-score
+{
+    border:rgb(0, 255, 0) solid 1px;
+}
+
+.armoury
+{
+    border-top:rgb(0, 255, 0) solid 2px;
+    border-left:rgb(0, 255, 0) solid 2px;
+    border-right:rgb(0, 255, 0) solid 2px;
+}
+
+.armoury-title
+{
+    font-size: 50px;
+    color: black;
+    background-color: rgb(0, 255, 0);
+}
+
+.rock, .paper, .scissors
+{
+    border: solid 2px rgb(0, 255, 0);
 }
