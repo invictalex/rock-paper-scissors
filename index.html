@@ -13,12 +13,22 @@
 </head>
 <body>
     <div class="main">
-        <div class="spacer"></div>
+        <div class="title">
+            <h1>Rock, Paper, Scissors.</h1>
+            <p>Best of five!</p>
+        </div>
         <div class="playerboard">
             <div class="cpu-title">Me</div>
-            <div class="cpu-icon"></div>
-            <div class="game-updates">Versus</div>
-            <div class="player-icon"></div>
+            <div class="cpu-box">
+                <object data="" class="icon fade" id="cpu-icon"></object>
+            </div>
+            <div class="game-updates">
+                <p class="notif">Versus</p>
+                <p class="commentary"></p>
+            </div>
+            <div class="player-box">
+                <object data="" class="icon fade" id="player-icon"></object>
+            </div>
             <div class="player-title">You</div>
         </div>
         <div class="scoreboard-box">
@@ -36,18 +46,18 @@
     <div class="armoury">
         <div class="armoury-title">Armoury</div>
         <div class="armoury-options">
-            <div class="rock" class="icon-box">
+            <div id="rock" class="icon-box">
                 <object data="rock.svg" class="icon" id="rock-icon"></object>
             </div>
-            <div class="paper" class="icon-box">
+            <div id="paper" class="icon-box">
                 <object data="paper.svg" class="icon" id="paper-icon"></object>
             </div>
-            <div class="scissors" class="icon-box">
+            <div id="scissors" class="icon-box">
                 <object data="scissors.svg" class="icon" id="scissors-icon"></object>
             </div>
         </div>
     </div>
     
-    <script link="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

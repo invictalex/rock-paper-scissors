@@ -14,9 +14,43 @@
     color: black;
 }
 
+object
+{
+    pointer-events: none;
+}
+
+h1
+{
+    font-size: 70px;
+    font-weight: normal;
+}
+
+/* div
+{
+    border: white 2px solid;
+} */
 
 
-/*-----------------COLORS------------*/
+/*-----------------TRANSITIONS------------*/
+
+#player-icon, #cpu-icon
+{
+    
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notif
+{
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fade
+{
+    opacity: 0;
+}
+
+
 
 
 
@@ -50,15 +84,18 @@ body
     flex-shrink: 0;
 }
 
-.spacer, .scoreboard-box
+.title, .scoreboard-box
 {
     width: 15%;
 }
 
-.cpu-icon, .player-icon
+.cpu-box, .player-box
 {
     width: 150px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-title, .cpu-title
@@ -70,6 +107,12 @@ body
 {
     margin: 50px;
     font-size: 50px;
+}
+
+.commentary
+{
+    height: 30px;
+    flex-shrink: 0;
 }
 
 .scoreboard-box
@@ -138,7 +181,7 @@ body
     
 }
 
-.rock, .paper, .scissors
+.icon-box
 {
     width: 130px;
     height: 130px;
@@ -160,7 +203,7 @@ body
     color: rgb(21, 255, 0);
 }
 
-.cpu-icon, .player-icon, .scoreboard
+.cpu-box, .player-box, .scoreboard
 {
     border:rgb(21, 255, 0) solid 2px;
 }
@@ -190,7 +233,7 @@ body
     background-color: rgb(0, 255, 0);
 }
 
-.rock, .paper, .scissors
+.icon-box
 {
     border: solid 2px rgb(0, 255, 0);
 }
