@@ -24,7 +24,7 @@
             </div>
             <div class="game-updates">
                 <p class="notif">Versus</p>
-                <p class="commentary"></p>
+                <p class="commentary fade"></p>
             </div>
             <div class="player-box">
                 <object data="" class="icon fade" id="player-icon"></object>
@@ -56,6 +56,17 @@
                 <object data="scissors.svg" class="icon" id="scissors-icon"></object>
             </div>
         </div>
+    </div>
+
+    <div class="lightbox-end">
+        <h1>Game Over</h1>
+        <p class="final-scores"></p>
+        <button onClick="window.location.reload();">Play Again</button>
+    </div>
+
+    <div class="lightbox-start">
+        <h1 class="title">Rock, Paper, Scissors</h1>
+        <button class="play-game"></button>
     </div>
     
     <script src="script.js"></script>
