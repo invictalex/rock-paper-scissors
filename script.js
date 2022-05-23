@@ -132,7 +132,7 @@ function updateGame(playerSelection, cpuSelection)
         endGame(playerScore, cpuScore);
     } else 
     {
-        setTimeout(startNextRound, 1500, playerSelection);
+        setTimeout(startNextRound, 2500, playerSelection);
     }
 }
 
