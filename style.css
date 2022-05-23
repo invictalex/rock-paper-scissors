@@ -208,8 +208,8 @@ body
     top: 0;
     width: 100%;
     height: 100%;
-    background-color:black;
     display:none;
+    background-color: black;
 
 }
 
@@ -222,10 +222,43 @@ body
     gap: 30px;
 }
 
-.lightbox-end button
+button
 {
     background-color: black;
     color:rgb(0, 255, 0);
+}
+
+.lightbox-start
+{
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+.lightbox-start h1
+{
+    width: 100%;
+    text-align: center;
+}
+
+.lightbox-start.invisible
+{
+    
+   opacity: 0;
+}
+
+.lightbox-start.inactive 
+{
+    display: none;
 }
 
 

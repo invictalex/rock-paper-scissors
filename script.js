@@ -1,6 +1,9 @@
 var iconBoxes = document.querySelectorAll(".icon-box");
 var playerIcon = document.querySelector(".player-icon");
 var notification = document.querySelector(".game-updates");
+var playButton = document.querySelector(".play-game");
+var startScreen = document.querySelector(".lightbox-start");
+var playAgainBtn = document.querySelector(".play-again");
 
 var tieScripts = ["Stop copying me... ", "didn't you hear me?? ", "Wow... you must be a parrot! ", "How original... "];
 var playerPointScripts = ["Ok... you got this one...", "sheer luck...", "bet you won't do that again.. ", "You must be cheating", "But... the computer should always win"];
@@ -14,6 +17,15 @@ var tieCounter = 0;
 var midPlay = false;
 var lastScore = "";
 
+playButton.addEventListener("click", function()
+{
+    startScreen.classList.add("invisible");
+    startScreen.addEventListener("transitionend", function()
+    {
+        this.classList.add("inactive");
+    })
+});
+
 iconBoxes.forEach(iconBox =>
 {
     iconBox.addEventListener("click", function(e)
@@ -26,9 +38,11 @@ iconBoxes.forEach(iconBox =>
 
 
         playRound(e);
+        
     })
     
 })
+resetBoard();
 
 function playRound(e)
 {
@@ -164,7 +178,7 @@ function updateScores(playerSelection, cpuSelection)
         gameOver(playerScore, cpuScore);
     } else 
     {
-        setTimeout(resetBoard, 2500, playerSelection);
+        setTimeout(nextRound, 1500, playerSelection);
     }
 
     
@@ -183,7 +197,7 @@ function randomizer(arr, lower, upper)
     return arr[index];
 }
 
-function resetBoard(playerSelection)
+function nextRound(playerSelection)
 {   
     var selectedIcon = document.querySelector(`#${playerSelection}`);
     selectedIcon.classList.toggle("double-border");
@@ -222,11 +236,52 @@ function gameOver(playerScore, cpuScore)
     
     if (playerScore > cpuScore)
     {
-        finalScores.textContent = `You win ${playerScore} to ${cpuScore}`;
+        finalScores.textContent = `You win ${playerScore} to ${cpuScore}. Damn.`;
     } else
     {
-        finalScores.textContent = `I [CPU] win ${cpuScore} to ${playerScore}`;
+        finalScores.textContent = `CPU wins ${cpuScore} to ${playerScore}. Ha ha!`;
     }
 
+    
+}
+
+function resetBoard()
+{
+    playAgainBtn.addEventListener("click", function(e)
+    {
+        console.log(e);
+        alert("worked");
+        playerScore = 0;
+        cpuScore = 0;
+        tieCounter = 0;
+        midPlay = false;
+        lastScore = "";
+        var playerScoreboard = document.querySelector(".player-score");
+        var cpuScoreboard = document.querySelector(".cpu-score");
+        var lightbox = document.querySelector(".lightbox-end");
+        var commentary = document.querySelector(".commentary");
+        var notif = document.querySelector(".notif");
+
+
+
+        playerScoreboard.textContent = "";
+        cpuScoreboard.textContent = "";
+        commentary.textContent = "";
+        commentary.classList.toggle("fade");
+        lightbox.classList.toggle("active");
+
+        var playerIcon = document.querySelector("#player-icon");
+        playerIcon.data = "";
+        playerIcon.classList.toggle("fade");
+
+        var cpuIcon = document.querySelector("#cpu-icon");
+        cpuIcon.data = "";
+        cpuIcon.classList.toggle("fade");
+
+        notif.textContent = "versus";
+    
+        
+        
+    })
 }
 
