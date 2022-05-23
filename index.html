@@ -12,25 +12,36 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+
+    <div class="start-screen">
+        <h1 class="title">Rock, Paper, Scissors.</h1>
+        <button class="play-game">Play</button>
+        <p>By Alex Christodoulou.</p>
+    </div>
+
+
     <div class="main">
+        
         <div class="title">
             <h1>Rock, Paper, Scissors.</h1>
             <p>Best of five!</p>
         </div>
+
         <div class="playerboard">
             <div class="cpu-title">Me</div>
             <div class="cpu-box">
                 <object data="" class="icon fade" id="cpu-icon"></object>
             </div>
             <div class="game-updates">
-                <p class="notif">Versus</p>
-                <p class="commentary fade"></p>
+                <p class="notif-one">Versus</p>
+                <p class="notif-two fade"></p>
             </div>
             <div class="player-box">
                 <object data="" class="icon fade" id="player-icon"></object>
             </div>
             <div class="player-title">You</div>
         </div>
+
         <div class="scoreboard-box">
             <div class="scoreboard">
                 <div class="scoreboard-title">Scoreboard</div>
@@ -58,15 +69,11 @@
         </div>
     </div>
 
-    <div class="lightbox-end">
+
+    <div class="end-screen">
         <h1>Game Over</h1>
         <p class="final-scores"></p>
         <button class="play-again">Play Again</button>
-    </div>
-
-    <div class="lightbox-start">
-        <h1 class="title">Rock, Paper, Scissors.</h1>
-        <button class="play-game">Play</button>
     </div>
     
     <script src="script.js"></script>

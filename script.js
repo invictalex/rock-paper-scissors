@@ -1,21 +1,31 @@
+/*-------------------------------SELECTORS---------------------------*/
+
 var iconBoxes = document.querySelectorAll(".icon-box");
 var playerIcon = document.querySelector(".player-icon");
-var notification = document.querySelector(".game-updates");
 var playButton = document.querySelector(".play-game");
-var startScreen = document.querySelector(".lightbox-start");
+var startScreen = document.querySelector(".start-screen");
 var playAgainBtn = document.querySelector(".play-again");
+
+/*-------------------------------NOTIFICATION SCRIPTS---------------------------*/
 
 var tieScripts = ["Stop copying me... ", "didn't you hear me?? ", "Wow... you must be a parrot! ", "How original... "];
 var playerPointScripts = ["Ok... you got this one...", "sheer luck...", "bet you won't do that again.. ", "You must be cheating", "But... the computer should always win"];
 var cpuScripts = ["lightwork... ", "unlucky boss... ", "I do this in my sleep! ", "Ruling champion of the world... C.P.U.! ", "squeaky bum time, is it? "];
 var againScripts = ["have another go", "pick your weapon", "give it your best shot", "try again", "hit me again"];
 
+/*-------------------------------COUNTERS---------------------------*/
 
 var playerScore = 0;
 var cpuScore = 0;
 var tieCounter = 0;
 var midPlay = false;
-var lastScore = "";
+var lastRoundTied = false;
+
+
+
+/*-------------------------------EVENTS---------------------------*/
+
+
 
 playButton.addEventListener("click", function()
 {
@@ -36,27 +46,25 @@ iconBoxes.forEach(iconBox =>
         }
         midPlay = true;
 
-
-        playRound(e);
-        
+        playGame(e);
     })
-    
 })
+
 resetBoard();
 
-function playRound(e)
+
+/*-----------------------FUNCTIONS---------------------*/
+
+
+function playGame(e)
 {
     var playerSelection = e.path[0].id;
-
     var cpuSelection = cpuPlay();
-
     var selectedIcon = document.querySelector(`#${playerSelection}`);
+
     selectedIcon.classList.toggle("double-border");
 
-    beginTransition(playerSelection, cpuSelection);
-
-  
-    
+    startGame(playerSelection, cpuSelection);
 }
 
 function cpuPlay()
@@ -67,23 +75,21 @@ function cpuPlay()
     return rps[index];
 }
 
-
-
-function beginTransition(playerSelection, cpuSelection)
+function startGame(playerSelection, cpuSelection)
 {
-    notif = document.querySelector(".notif");
-    notif.classList.toggle("fade");
-    notif.addEventListener("transitionend", function()
+    notifOne = document.querySelector(".notif-one");
+    notifOne.classList.toggle("fade");
+    notifOne.addEventListener("transitionend", function()
     {
-        notif.textContent = "ching..."
-        notif.classList.toggle("fade");
+        this.textContent = "ching..."
+        this.classList.toggle("fade");
 
         this.addEventListener("transitionend", function()
         {
             this.classList.toggle("fade");
             this.addEventListener("transitionend", function()
             {
-                notif.textContent = "chang...";
+                this.textContent = "chang...";
                 this.classList.toggle("fade");
 
                 this.addEventListener("transitionend", function()
@@ -91,133 +97,140 @@ function beginTransition(playerSelection, cpuSelection)
                     this.classList.toggle("fade");
                     this.addEventListener("transitionend", function()
                     {
-                        notif.textContent = "chong!";
+                        this.textContent = "chong!";
                         this.classList.toggle("fade");
 
-                        updateBoard(playerSelection, cpuSelection);
-                        setTimeout(updateScores, 1000, playerSelection, cpuSelection);
-                        
+                        displaySelections(playerSelection, cpuSelection);
+                        setTimeout(updateGame, 1000, playerSelection, cpuSelection);
                         
                     }, {once: true})
                 }, {once: true});
-                
             }, {once: true})
         }, {once: true});
-        
     }, {once: true})
-
 }
 
-function updateBoard(playerSelection, cpuSelection)
+function displaySelections(playerSelection, cpuSelection)
 {
     var playerIcon = document.querySelector("#player-icon");
+    var cpuIcon = document.querySelector("#cpu-icon");
+
     playerIcon.data = `${playerSelection}.svg`
     playerIcon.classList.toggle("fade");
-
-    var cpuIcon = document.querySelector("#cpu-icon");
+    
     cpuIcon.data = `${cpuSelection}.svg`
     cpuIcon.classList.toggle("fade");
 }
 
+function updateGame(playerSelection, cpuSelection)
+{
+    updateScores(playerSelection, cpuSelection);
+    computeNotifTwo(playerSelection, cpuSelection);
+    
+    if (playerScore ===3 || cpuScore ===3)
+    {
+        endGame(playerScore, cpuScore);
+    } else 
+    {
+        setTimeout(startNextRound, 1500, playerSelection);
+    }
+}
+
 function updateScores(playerSelection, cpuSelection)
 {
-
-    
-
-    var commentary = document.querySelector(".commentary");
     var playerScoreboard = document.querySelector(".player-score");
     var cpuScoreboard = document.querySelector(".cpu-score");
 
-    commentary.classList.toggle("fade");
-
     if (playerSelection == cpuSelection)
     {
-        if (tieCounter == 0)
-        {
-            commentary.textContent = tieScripts[0];
-        }
-        else if (tieCounter == 1 && lastScore == "tie")
-        {
-            commentary.textContent = tieScripts[1];
-        }
-        else
-        {
-            commentary.textContent = randomizer(tieScripts, 2, 3);
-        }
-        tieCounter++;
-        console.log("Tie");
-        lastScore = "tie";
-    } else if ((playerSelection == "rock" && cpuSelection == "scissors") || (playerSelection == "paper" && cpuSelection ==
+        return;
+    } 
+    else if ((playerSelection == "rock" && cpuSelection == "scissors") || (playerSelection == "paper" && cpuSelection ==
     "rock") || (playerSelection == "scissors" && cpuSelection == "paper"))
    {
         playerScore++;    
         playerScoreboard.textContent = playerScore;
 
-        if (playerScore <=1)
-        {
-            commentary.textContent = randomizer(playerPointScripts, 0, 2);
-        } else
-        {
-            commentary.textContent = randomizer(playerPointScripts, 3, 4);
-        }
-        console.log(playerScore);
-        lastScore = "player";
    } else
    {
        cpuScore++;
        cpuScoreboard.textContent = cpuScore;
-       
-       commentary.textContent = randomizer(cpuScripts, 0, 4)
-       console.log(cpuScore);
-
-       lastScore = "cpu";
    }
-    
-    if (playerScore ===3 || cpuScore ===3)
-    {
-        gameOver(playerScore, cpuScore);
-    } else 
-    {
-        setTimeout(nextRound, 1500, playerSelection);
-    }
-
-    
 }
 
-function randomizer(arr, lower, upper)
+function computeNotifTwo(playerSelection, cpuSelection)
+{
+    var notifTwo = document.querySelector(".notif-two");
+
+    notifTwo.classList.toggle("fade");
+
+    if (playerSelection == cpuSelection)
+    {
+        if (tieCounter == 0)
+        {
+            notifTwo.textContent = tieScripts[0];
+        }
+        else if (tieCounter == 1 && lastRoundTied)
+        {
+            notifTwo.textContent = tieScripts[1];
+        }
+        else
+        {
+            notifTwo.textContent = arrRandomizer(tieScripts, 2, 3);
+        }
+        tieCounter++;
+        lastRoundTied = true;
+    } 
+    else if ((playerSelection == "rock" && cpuSelection == "scissors") || (playerSelection == "paper" && cpuSelection ==
+    "rock") || (playerSelection == "scissors" && cpuSelection == "paper"))
+    {
+        if (playerScore <=1)
+        {
+            notifTwo.textContent = arrRandomizer(playerPointScripts, 0, 2);
+        } else
+        {
+            notifTwo.textContent = arrRandomizer(playerPointScripts, 3, 4);
+        }
+
+        lastRoundTied = false;
+    } else
+    {
+       notifTwo.textContent = arrRandomizer(cpuScripts, 0, 4)
+       lastRoundTied = false;
+    }
+}
+
+function arrRandomizer(arr, lower, upper)
 {
    if (!arr[lower] || !arr[upper])
    {
        return "error";
    }
 
-    var range = (upper + 1) - lower;
-    var index = Math.floor(Math.random()*range) + lower;
+   var range = (upper + 1) - lower;
+   var index = Math.floor(Math.random()*range) + lower;
 
-    return arr[index];
+   return arr[index];
 }
 
-function nextRound(playerSelection)
+function startNextRound(playerSelection)
 {   
-    var selectedIcon = document.querySelector(`#${playerSelection}`);
-    selectedIcon.classList.toggle("double-border");
-
-    var commentary = document.querySelector(".commentary");
+    var selectedWeapon = document.querySelector(`#${playerSelection}`);
+    var notifTwo = document.querySelector(".notif-two");
     var playerIcon = document.querySelector("#player-icon");
     var cpuIcon = document.querySelector("#cpu-icon");
-    var notif = document.querySelector(".notif");
+    var notifOne = document.querySelector(".notif-one");
 
-    commentary.classList.toggle("fade");
+    selectedWeapon.classList.toggle("double-border");
+    notifTwo.classList.toggle("fade");
     playerIcon.classList.toggle("fade");
     cpuIcon.classList.toggle("fade");
-    notif.classList.toggle("fade");
+    notifOne.classList.toggle("fade");
 
-    
-
-    notif.addEventListener("transitionend", function()
+    notifOne.addEventListener("transitionend", function()
     {
-        notif.classList.toggle("fade");
-        notif.textContent = randomizer(againScripts, 0, 4);
+        this.classList.toggle("fade");
+        this.textContent = arrRandomizer(againScripts, 0, 4);
 
         setTimeout(function()
         {
@@ -226,13 +239,12 @@ function nextRound(playerSelection)
     }, {once: true})
 }
 
-function gameOver(playerScore, cpuScore)
+function endGame(playerScore, cpuScore)
 {
-   
-    var lightbox = document.querySelector(".lightbox-end");
+    var endScreen = document.querySelector(".end-screen");
     var finalScores = document.querySelector(".final-scores");
 
-    lightbox.classList.add("active");
+    endScreen.classList.add("active");
     
     if (playerScore > cpuScore)
     {
@@ -241,47 +253,35 @@ function gameOver(playerScore, cpuScore)
     {
         finalScores.textContent = `CPU wins ${cpuScore} to ${playerScore}. Ha ha!`;
     }
-
-    
 }
 
 function resetBoard()
 {
-    playAgainBtn.addEventListener("click", function(e)
+    playAgainBtn.addEventListener("click", function()
     {
-        console.log(e);
-        alert("worked");
+        var playerScoreboard = document.querySelector(".player-score");
+        var cpuScoreboard = document.querySelector(".cpu-score");
+        var endScreen = document.querySelector(".end-screen");
+        var notifOne = document.querySelector(".notif-one");
+        var notifTwo = document.querySelector(".notif-two");
+        var playerIcon = document.querySelector("#player-icon");
+        var cpuIcon = document.querySelector("#cpu-icon");
+
         playerScore = 0;
         cpuScore = 0;
         tieCounter = 0;
         midPlay = false;
-        lastScore = "";
-        var playerScoreboard = document.querySelector(".player-score");
-        var cpuScoreboard = document.querySelector(".cpu-score");
-        var lightbox = document.querySelector(".lightbox-end");
-        var commentary = document.querySelector(".commentary");
-        var notif = document.querySelector(".notif");
-
-
-
+        lastRoundTied = false;
         playerScoreboard.textContent = "";
         cpuScoreboard.textContent = "";
-        commentary.textContent = "";
-        commentary.classList.toggle("fade");
-        lightbox.classList.toggle("active");
-
-        var playerIcon = document.querySelector("#player-icon");
+        notifOne.textContent = "versus";
+        notifTwo.textContent = "";
+        notifTwo.classList.toggle("fade");
+        endScreen.classList.toggle("active");
         playerIcon.data = "";
         playerIcon.classList.toggle("fade");
-
-        var cpuIcon = document.querySelector("#cpu-icon");
         cpuIcon.data = "";
         cpuIcon.classList.toggle("fade");
-
-        notif.textContent = "versus";
-    
-        
-        
     })
 }
 
